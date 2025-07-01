@@ -47,7 +47,7 @@ docker build -t ekangaki/register-app:v1 .
 3. Push the images to the Docker Hub
 a. login to your DockerHub
 
-docker push ekangaki/login-app:v1
-docker push ekangaki/register-app:v1
+$ docker push ekangaki/login-app:v1
+$ docker push ekangaki/register-app:v1
 
 
