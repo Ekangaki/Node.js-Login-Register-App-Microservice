@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: register-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: register-app
+  template:
+    metadata:
+      labels:
+        app: register-app
+    spec:
+      containers:
+      - name: register-app
+        image: kelvi17/login-register:register
+        ports:
+        - containerPort: 3001
+        env:
+          - name: DB_HOST
+            value: mysql-service.default.svc.cluster.local
+          - name: DB_USER
+            value: root
+          - name: DB_PASSWORD
+            value: Admin@2003
+          - name: DB_NAME
+            value: user_auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: register-service
+spec:
+  selector:
+    app: register-app
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+  type: ClusterIP
